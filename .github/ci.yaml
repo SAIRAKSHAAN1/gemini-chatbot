@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up and build
+      uses: ./.github/actions/setup-and-build
+      
+    - name: Lint
+      run: npm run lint
+      
+    - name: Type check
+      run: npm run type-check
